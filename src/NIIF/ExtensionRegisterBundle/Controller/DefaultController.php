@@ -20,7 +20,12 @@ class DefaultController extends Controller
     public function getExtensionAction($nameId)
     {
 
-        // TODO IP cím alapján autorizálni!!!
+        // Authorization by IP address
+        $enabled_ips = $this->container->getParameter('extension_register.enabled_ips');
+        if (! in_array($_SERVER['REMOTE_ADDR'], $enabled_ips)) {
+            throw $this->createAccessDeniedException('You cant access this page form your IP address!');
+        }
+
         $response = new JsonResponse();
         try {
             $em = $this->getDoctrine()->getManager();
