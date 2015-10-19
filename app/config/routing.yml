@@ -1,0 +1,4 @@
+niif_extension_register:
+    resource: "@NIIFExtensionRegisterBundle/Controller/"
+    type:     annotation
+    prefix:   /

@@ -1,0 +1,45 @@
+<?php
+
+namespace NIIF\ExtensionRegisterBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table(
+ *     indexes={
+ *         @ORM\Index(name="ix_eppn", columns={"eppn"}),
+ *         @ORM\Index(name="ix_extension", columns={"extension"})
+ *     },
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="ix_eppn_u", columns={"eppn"}),
+ *         @ORM\UniqueConstraint(name="ix_extension_u", columns={"extension"})
+ *    }
+ * )
+ * @ORM\HasLifecycleCallbacks
+ */
+class Extension
+{
+    /**
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name="eppn", type="string", length=255, unique=true, nullable=false )
+     */
+    private $eppn;
+
+    /**
+     * @ORM\Column(name="extension", type="integer", unique=true, nullable=false )
+     */
+    private $extension;
+
+    /**
+     * @ORM\Column(name="last_login", type="date", nullable=false )
+     */
+    private $lastLogin;
+}
