@@ -20,5 +20,5 @@ parameters:
 
     extension_register.first_extension: 2000
     extension_register.last_extension:  9999
-    extension-register.enabled_ips:
+    extension_register.enabled_ips:
         - 127.0.0.1
