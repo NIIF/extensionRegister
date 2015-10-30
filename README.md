@@ -2,16 +2,21 @@ ExtensionRegister
 
 Install
 -----------
+git clone https://dev.niif.hu/gyufi/extensionregister.git
+cd extensionregister
 composer install
 
-Configure
--------------
-Töltsük ki a parameters.yml-ban
+Ebben a lépésben konfigurációra is van lehetőség:
 
-* adatbázis kapcsolat értékeit,
-* logolást,
-* az első és utolsó extension értékét,
-* valamint azon IP címeket, amiknek válaszol a szoftver.
+* adatbázis kapcsolat értékei,
+* logolás,
+* az első és utolsó extension értékei,
+* valamint azon IP címek, amiknek válaszol a szoftver.
+
+inicializáljuk az adatbázist:
+
+app/console doctrine:database:create
+app/console doctrine:schema:create
 
 Üzemeltetés
 ----------------
