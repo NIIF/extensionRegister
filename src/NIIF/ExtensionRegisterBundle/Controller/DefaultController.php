@@ -19,7 +19,6 @@ class DefaultController extends Controller
      */
     public function getExtensionAction($nameId)
     {
-
         // Authorization by IP address
         $enabled_ips = $this->container->getParameter('extension_register.enabled_ips');
         if (! in_array($_SERVER['REMOTE_ADDR'], $enabled_ips)) {
@@ -27,7 +26,6 @@ class DefaultController extends Controller
                 'You cant access this page form your IP address! '. $_SERVER['REMOTE_ADDR']
             );
         }
-
         $response = new JsonResponse();
         try {
             $em = $this->getDoctrine()->getManager();
@@ -70,26 +68,25 @@ class DefaultController extends Controller
                 );
             }
         }
-
+        
         $last  = $this->container->getParameter('extension_register.last_extension');
-        $remainingExtensions = $last - $next;
-
+        
         return array(
-            'remainingExtensions' => $remainingExtensions
+            'remainingExtensions' => $last - $next
         );
     }
 
     /**
-     * Visszaadja a következő extensiont, vagy dob egy exceptiont, hogy nincs több.
-     * @return integer Következő extension
+     * Return the next extension.
+     * @return integer next extension.
      */
     private function getNextExtension()
     {
         $first = $this->container->getParameter('extension_register.first_extension');
         $last  = $this->container->getParameter('extension_register.last_extension');
-
+        
         $em = $this->getDoctrine()->getManager();
-
+        
         $last_entity = $em->createQueryBuilder()
             ->select('e')
             ->from('NIIFExtensionRegisterBundle:Extension', 'e')
@@ -103,17 +100,16 @@ class DefaultController extends Controller
         }
 
         $lastExtension = $last_entity->getExtension();
-
+        
         if ($lastExtension >= $last) {
             throw new \Exception("There is no free extension", 507);
         }
-
         return $lastExtension + 1;
     }
     /**
-     * Új extensiont oszt a kérdezett felhasználónak
-     * @param  string $nameId Felhasználó nameId-ja
-     * @return Extension    Létrehozott extension entitás
+     * Set new extension to user
+     * @param  string $nameId nameId of the user
+     * @return Extension the extension
      */
     private function createExtension($nameId)
     {

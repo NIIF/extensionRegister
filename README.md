@@ -2,31 +2,45 @@ ExtensionRegister
 
 Install
 -----------
+
+```
 git clone https://dev.niif.hu/gyufi/extensionregister.git
 cd extensionregister
 composer install
+```
 
-Ebben a lépésben konfigurációra is van lehetőség:
+The configuration
 
-* adatbázis kapcsolat értékei,
-* logolás,
-* az első és utolsó extension értékei,
-* valamint azon IP címek, amiknek válaszol a szoftver.
+* database host, port, credentials,
+* logging parameters,
+* first and last extenension to define the pool,
+* permitted IP addresses.
 
-inicializáljuk az adatbázist:
+Database initialization:
 
+```
 app/console doctrine:database:create
 app/console doctrine:schema:create
+```
 
-Üzemeltetés
+Usage
+------
+
+Install simplesamlphp in VidyoProxy role, install and config the https://github.com/NIIF/simplesamlphp-module-attributefromrestapi module and you can register and send extensions of your authenticated users to Vidyo.
+
+URL: /getExtension/{nameId}
+
+Maintenance
 ----------------
 
-A /getHealth URL-en visszaadjuk a fennmaradó extension-ök számát. Icingába való.
+The /getHealth URL provide the number of remain extenstions in the pool. You can use it in your monitoring system.
 
 
 Testing
 ------------------
 
-devel környezetben:
+In development environment:
 
+```
 bin/behat
+```
