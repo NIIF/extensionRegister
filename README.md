@@ -4,7 +4,7 @@ Install
 -----------
 
 ```
-git clone https://dev.niif.hu/gyufi/extensionregister.git
+git clone https://github.com/NIIF/extensionRegister.git
 cd extensionregister
 composer install
 ```
